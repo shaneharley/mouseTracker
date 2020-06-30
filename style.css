@@ -1,13 +1,44 @@
 :root {
   --primary-color: black;
   --secondary-color: white;
+  cursor:none;
 }
 body {
   margin: 0;
   padding: 0;
+  
 }
 section {
   width: 100vw;
-  height: 100vh;
+  height: 200vh;
   background-color: var(--primary-color);
+
+}
+div.cursor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.cursor .innerCursor {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  margin: 0 auto;
+  background-color: white;
+  transform-origin: center center;
+  top: 25%;
+  left: 25%;
+  border-radius: 50%;
+  transition: all .5s;
+  transition-timing-function: ease-in-out;
+  transform: scale(.50);
+}
+.innerCursor.clicked {
+  transform: scale(2);
+  transform-origin: center center;
 }
