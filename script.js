@@ -1,51 +1,57 @@
 const section = document.querySelector('section')
 const cursor = document.querySelector('div.cursor')
 const innerCursor = document.querySelector('div.innerCursor')
-let currentX = 0
-let currentY = 0
-let aimX = 0
-let aimY = 0
+const pageLinks = document.querySelectorAll('a')
 
-console.log(innerCursor)
+//initializing cursor positions
+let currentX = 50
+let currentY = 50
+let aimX = 50
+let aimY = 50
 
-const smooth = (event) => {
-  let aimX = event.pageX
-  let aimY = event.pageY
-  console.log(aimX)
+//cycling through every link and make it so when I hover it changes the cursor style
+pageLinks.forEach(link => {
+  link.addEventListener('mouseenter', (event) => {
+    innerCursor.classList.add('clicked')
+  })
+  link.addEventListener('mouseleave', () => {
+    innerCursor.classList.remove('clicked')
+  })
+})
+
+
+const updateMouseAim = event => {
+  aimX = event.pageX
+  aimY = event.pageY
 }
 
-
-
-
+//if the window detects a mousemove or scroll, update the aim position
 window.addEventListener('mousemove', (event) => {
-  aimX = event.pageX
-  aimY = event.pageY
+  updateMouseAim(event)
 })
 window.addEventListener('wheel', (event) => {
-  aimX = event.pageX
-  aimY = event.pageY
+  updateMouseAim(event)
 })
 
+
+
 const animate = () => {
+  //calculate the difference between where its aimed and where it currently is
+  //this update the current position to be slightly closer each time
   const diffX = aimX - currentX
   currentX = currentX + (diffX * 0.10)
 
   const diffY = aimY - currentY
   currentY = currentY + (diffY * 0.10)
 
+  //update the cursor position
   cursor.style.left = currentX + 'px'
   cursor.style.top = currentY + 'px'
 
-
+  //keep running this
   requestAnimationFrame(animate)
 }
 
 animate()
 
-document.addEventListener('mousedown', () => {
-  innerCursor.classList.add('clicked')
-})
-document.addEventListener('mouseup', () => {
-  innerCursor.classList.remove('clicked')
-})
 

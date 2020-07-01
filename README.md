@@ -3,6 +3,6 @@
 
 Creating a custom mouse cursor using JS
 - Detect where the mouse is on the page
-- Create a shape at that location
+- Move the mouse to that position
 - Move the shape (with easing) when the mouse is moved
-- Change the style when hovering over a link
+- Change the style when hovering over any link
